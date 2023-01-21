@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.driver.model.Admin;
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, Integer>{
-    @Query(value = "DELETE FROM admin a WHERE a.adminId = ?1",
+    @Query(value = "DELETE FROM admin a WHERE a.admin_id = ?1",
             nativeQuery = true)
     void deleteAdminById(int adminId);
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.driver.model.Driver;
 @Repository
 public interface DriverRepository extends JpaRepository<Driver, Integer>{
-    @Query(value = "DELETE FROM driver d WHERE d.driverId = ?1 ",
+    @Query(value = "DELETE FROM driver d WHERE d.driver_id = ?1 ",
            nativeQuery = true)
     void deleteDriverByDriverId(int driverId);
 
