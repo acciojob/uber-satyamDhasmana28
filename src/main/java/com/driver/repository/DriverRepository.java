@@ -11,7 +11,7 @@ import com.driver.model.Driver;
 public interface DriverRepository extends JpaRepository<Driver, Integer>{
     @Query(value = "DELETE FROM driver d WHERE d.driver_id = ?1 ",
            nativeQuery = true)
-    void deleteDriverByDriverId(int driverId);
+    void delete(int driverId);
 
     List<Driver> findAllByOrderByDriverId();
 }
