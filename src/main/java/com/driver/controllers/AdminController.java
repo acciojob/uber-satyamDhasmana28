@@ -18,10 +18,6 @@ import java.util.List;
 public class AdminController {
     @Autowired
 	AdminService adminService;
-    @Autowired
-    CustomerRepository customerRepository;
-    @Autowired
-    DriverRepository driverRepository;
 	@PostMapping("/register")
 	public ResponseEntity<Void> registerAdmin(@RequestBody Admin admin){
 		adminService.adminRegister(admin);

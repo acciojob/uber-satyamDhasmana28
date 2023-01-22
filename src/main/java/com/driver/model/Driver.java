@@ -1,5 +1,7 @@
 package com.driver.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,7 @@ public class Driver {
     private String password;
 //    OneToOne relationship with Cab
     @OneToOne(mappedBy = "driver", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("cab")
     private Cab cab;
 
 //    OneToMany relationship with TripBooking

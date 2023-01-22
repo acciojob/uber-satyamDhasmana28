@@ -1,5 +1,7 @@
 package com.driver.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +14,7 @@ public class Cab {
 //    OneToOne relation with Driver
     @OneToOne
     @JoinColumn
+    @JsonIgnore
     private Driver driver;
 //    getter and setter
 

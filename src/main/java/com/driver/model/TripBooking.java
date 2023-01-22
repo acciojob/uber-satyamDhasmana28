@@ -1,5 +1,7 @@
 package com.driver.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -19,6 +21,7 @@ public class TripBooking {
 //   ManyToOne relationship with Driver
     @ManyToOne
     @JoinColumn
+    @JsonIgnore
     private Customer customer;
 //    getter and setter
 
