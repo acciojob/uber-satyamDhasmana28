@@ -8,6 +8,7 @@ import java.util.List;
 
 @Entity
 public class Driver {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int driverId;
@@ -15,7 +16,6 @@ public class Driver {
     private String password;
 //    OneToOne relationship with Cab
     @OneToOne(mappedBy = "driver", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("cab")
     private Cab cab;
 
 //    OneToMany relationship with TripBooking

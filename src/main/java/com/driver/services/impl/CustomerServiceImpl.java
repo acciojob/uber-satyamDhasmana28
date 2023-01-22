@@ -1,6 +1,7 @@
 package com.driver.services.impl;
 
 import com.driver.model.*;
+import com.driver.repository.CabRepository;
 import com.driver.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,8 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	TripBookingRepository tripBookingRepository2;
+	@Autowired
+	private CabRepository cabRepository;
 
 	@Override
 	public void register(Customer customer) {
@@ -43,6 +46,7 @@ public class CustomerServiceImpl implements CustomerService {
 		//Book the driver with lowest driverId who is free (cab available variable is Boolean.TRUE). If no driver is available, throw "No cab available!" exception
 		//Avoid using SQL query
 		List<Driver> driverList =driverRepository2.findAllByOrderByDriverId();
+//		System.out.println(driverList);
 		Driver availableDriver = null;
         for(Driver driver : driverList){
 			Cab driverCab = driver.getCab();
@@ -51,6 +55,7 @@ public class CustomerServiceImpl implements CustomerService {
 				break;
 			}
 		}
+//		System.out.println(availableDriver);
 		if(availableDriver==null){
 			throw new Exception("No cab available!");
 		}
@@ -68,9 +73,14 @@ public class CustomerServiceImpl implements CustomerService {
 
 		tripBooking.setDriver(availableDriver);
 		availableDriver.getTripBookingList().add(tripBooking);
-//		it will also save tripBooking
-		customerRepository2.save(customer);
-		driverRepository2.save(availableDriver);
+//		making the driver's cab unavailable
+		Cab driverCab = availableDriver.getCab();
+		driverCab.setAvailable(false);
+		availableDriver.setCab(driverCab);
+		driverCab.setDriver(availableDriver);
+//		if i save the driver then it will automaticallu save the cab and tripbooking
+//		driverRepository2.save(availableDriver);
+		tripBookingRepository2.save(tripBooking);
 		return tripBooking;
 	}
 
@@ -83,7 +93,7 @@ public class CustomerServiceImpl implements CustomerService {
 		Driver driver = tripBooking.getDriver();
 		driver.getCab().setAvailable(true);
 
-		driverRepository2.save(driver);
+		tripBookingRepository2.save(tripBooking);
 	}
 
 	@Override
@@ -95,7 +105,7 @@ public class CustomerServiceImpl implements CustomerService {
 		 Driver driver = tripBooking.getDriver();
 		 driver.getCab().setAvailable(true);
 
-		 driverRepository2.save(driver);
+		 tripBookingRepository2.save(tripBooking);
 
 	}
 }

@@ -14,7 +14,6 @@ public class Cab {
 //    OneToOne relation with Driver
     @OneToOne
     @JoinColumn
-    @JsonIgnore
     private Driver driver;
 //    getter and setter
 

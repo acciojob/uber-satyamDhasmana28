@@ -12,6 +12,7 @@ public class TripBooking {
     private String fromLocation;
     private String toLocation;
     private int distanceInKm;
+    @Enumerated(value = EnumType.STRING)
     private TripStatus tripStatus;
     private int bill;
 //   ManyToOne relationship with Driver
@@ -21,7 +22,6 @@ public class TripBooking {
 //   ManyToOne relationship with Driver
     @ManyToOne
     @JoinColumn
-    @JsonIgnore
     private Customer customer;
 //    getter and setter
 
