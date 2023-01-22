@@ -10,9 +10,7 @@ import com.driver.repository.CustomerRepository;
 import com.driver.repository.DriverRepository;
 import com.driver.repository.TripBookingRepository;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -57,7 +55,7 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 //		System.out.println(availableDriver);
 		if(availableDriver==null){
-			throw new NoCabAvailableException("No cab available!");
+			throw new NoCabAvailable("No cab available!");
 		}
 		Customer customer = customerRepository2.findById(customerId).get();
 //		List<TripBooking> tripBookingListByCustomer = customer.getTripBookingList();
